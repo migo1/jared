@@ -1,11 +1,19 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\User;
+use App\Http\Controllers\Controller;
+
 
 use Illuminate\Http\Request;
+use App\CarMake;
 
-class RentDetailController extends Controller
+class CarMakeController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -13,7 +21,9 @@ class RentDetailController extends Controller
      */
     public function index()
     {
-        //
+        $carMake = CarMake::orderBy('created_at','desc')->paginate(5);
+
+        return view('user_makes.index', compact('carMake'))->with('i', (request()->input('page', 1) - 1) * 5);
     }
 
     /**
@@ -34,7 +44,8 @@ class RentDetailController extends Controller
      */
     public function store(Request $request)
     {
-        //
+  
+
     }
 
     /**
@@ -45,7 +56,10 @@ class RentDetailController extends Controller
      */
     public function show($id)
     {
-        //
+        $car_make = CarMake::find($id);
+
+                
+        return view('user_makes.show',compact('car_make'));
     }
 
     /**

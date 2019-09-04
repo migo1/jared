@@ -10,8 +10,15 @@
     <meta name="author" content="">
     <link rel="icon" type="image/png" sizes="16x16" href="./assets/images/favicon.png">
     <title>JAY'S TRUCKS</title>
-    <link href="./assets/libs/flot/css/float-chart.css" rel="stylesheet">
-    <link href="./dist/css/style.min.css" rel="stylesheet">
+	<link rel="canonical" href="https://www.wrappixel.com/templates/xtremeadmin/" />
+    <!-- Custom CSS -->
+    <link href="{{ asset('assets/libs/chartist/dist/chartist.min.css')}}" rel="stylesheet">
+    <link href="{{ asset('assets/extra-libs/c3/c3.min.css')}}" rel="stylesheet">
+
+    <!-- Gallery CSS -->
+    <link href="{{ asset('assets/libs/magnific-popup/dist/magnific-popup.css')}}" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link href="{{ asset('dist/css/style.min.css')}}" rel="stylesheet">
 
 </head>
 
@@ -65,8 +72,8 @@
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark pro-pic" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="../../assets/images/users/1.jpg" alt="user" class="rounded-circle" width="31"></a>
                             <div class="dropdown-menu dropdown-menu-right user-dd animated">
-                                <a class="dropdown-item" href="javascript:void(0)"><i class="ti-user m-r-5 m-l-5"></i> My Profile</a>
-                                <a class="dropdown-item" href="{{ route('logout') }}"
+                                <p class="dropdown-item" href="javascript:void(0)">Welcome! {{ auth()->user()->name}}</p>
+                                <a class="dropdown-item mt-0" href="{{ route('logout') }}"
                                 onclick="event.preventDefault();
                                               document.getElementById('logout-form').submit();"
                                 ><i class="fa fa-power-off m-r-5 m-l-5"></i> Logout</a>
@@ -81,49 +88,27 @@
             </nav>
         </header>
 
-        <aside class="left-sidebar" data-sidebarbg="skin5">
+        <aside class="left-sidebar" data-sidebarbg="skin4">
             <!-- Sidebar scroll-->
             <div class="scroll-sidebar">
                 <!-- Sidebar navigation-->
                 <nav class="sidebar-nav">
-                    <ul id="sidebarnav" class="p-t-30">
-                    <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{ route('dashboard.index')}}" aria-expanded="false"><i class="mdi mdi-view-dashboard"></i><span class="hide-menu">Dashboard</span></a></li>
-                            <ul aria-expanded="false" class="collapse  first-level">
-                                <li class="sidebar-item"><a href="form-basic.html" class="sidebar-link"><i class="mdi mdi-note-outline"></i><span class="hide-menu"> Form Basic </span></a></li>
-                                <li class="sidebar-item"><a href="form-wizard.html" class="sidebar-link"><i class="mdi mdi-note-plus"></i><span class="hide-menu"> Form Wizard </span></a></li>
-                            </ul>
-                        </li>
-                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="pages-buttons.html" aria-expanded="false"><i class="mdi mdi-relative-scale"></i><span class="hide-menu">Buttons</span></a></li>
-                        <li class="sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-face"></i><span class="hide-menu">Icons </span></a>
-                            <ul aria-expanded="false" class="collapse  first-level">
-                                <li class="sidebar-item"><a href="icon-material.html" class="sidebar-link"><i class="mdi mdi-emoticon"></i><span class="hide-menu"> Material Icons </span></a></li>
-                                <li class="sidebar-item"><a href="icon-fontawesome.html" class="sidebar-link"><i class="mdi mdi-emoticon-cool"></i><span class="hide-menu"> Font Awesome Icons </span></a></li>
-                            </ul>
-                        </li>
-                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="pages-elements.html" aria-expanded="false"><i class="mdi mdi-pencil"></i><span class="hide-menu">Elements</span></a></li>
-                        <li class="sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-move-resize-variant"></i><span class="hide-menu">Addons </span></a>
-                            <ul aria-expanded="false" class="collapse  first-level">
-                                <li class="sidebar-item"><a href="index2.html" class="sidebar-link"><i class="mdi mdi-view-dashboard"></i><span class="hide-menu"> Dashboard-2 </span></a></li>
-                                <li class="sidebar-item"><a href="pages-gallery.html" class="sidebar-link"><i class="mdi mdi-multiplication-box"></i><span class="hide-menu"> Gallery </span></a></li>
-                                <li class="sidebar-item"><a href="pages-calendar.html" class="sidebar-link"><i class="mdi mdi-calendar-check"></i><span class="hide-menu"> Calendar </span></a></li>
-                                <li class="sidebar-item"><a href="pages-invoice.html" class="sidebar-link"><i class="mdi mdi-bulletin-board"></i><span class="hide-menu"> Invoice </span></a></li>
-                                <li class="sidebar-item"><a href="pages-chat.html" class="sidebar-link"><i class="mdi mdi-message-outline"></i><span class="hide-menu"> Chat Option </span></a></li>
-                            </ul>
-                        </li>
-                        <li class="sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-account-key"></i><span class="hide-menu">Authentication </span></a>
-                            <ul aria-expanded="false" class="collapse  first-level">
-                                <li class="sidebar-item"><a href="authentication-login.html" class="sidebar-link"><i class="mdi mdi-all-inclusive"></i><span class="hide-menu"> Login </span></a></li>
-                                <li class="sidebar-item"><a href="authentication-register.html" class="sidebar-link"><i class="mdi mdi-all-inclusive"></i><span class="hide-menu"> Register </span></a></li>
-                            </ul>
-                        </li>
-                        <li class="sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-alert"></i><span class="hide-menu">Errors </span></a>
-                            <ul aria-expanded="false" class="collapse  first-level">
-                                <li class="sidebar-item"><a href="error-403.html" class="sidebar-link"><i class="mdi mdi-alert-octagon"></i><span class="hide-menu"> Error 403 </span></a></li>
-                                <li class="sidebar-item"><a href="error-404.html" class="sidebar-link"><i class="mdi mdi-alert-octagon"></i><span class="hide-menu"> Error 404 </span></a></li>
-                                <li class="sidebar-item"><a href="error-405.html" class="sidebar-link"><i class="mdi mdi-alert-octagon"></i><span class="hide-menu"> Error 405 </span></a></li>
-                                <li class="sidebar-item"><a href="error-500.html" class="sidebar-link"><i class="mdi mdi-alert-octagon"></i><span class="hide-menu"> Error 500 </span></a></li>
-                            </ul>
-                        </li>
+                    <ul id="sidebarnav" class="p-t-30"> 
+                        <li>
+                                <div class="user-profile d-flex no-block dropdown mt-3">
+                                        <div class="user-pic"><img src="../../assets/images/users/1.jpg" alt="users" class="rounded-circle" width="40" /></div>
+                                        <div class="user-content hide-menu ml-2">
+                                            <p href="javascript:void(0)" class="" id="Userdd"  aria-haspopup="true" aria-expanded="false">
+                                                <h5 class="mb-0 user-name font-medium">{{ auth()->user()->name}}</h5>
+                                                <span class="op-5 user-email">{{ auth()->user()->email}}</span>
+                                            </p>
+        
+                                        </div>
+                                    </div>    
+                        </li>               
+                        <li class="sidebar-item"><a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{ route('dashboard.index')}}" aria-expanded="false"><i class="mdi mdi-view-dashboard"></i><span class="hide-menu">Dashboard</span></a></li>
+                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{ route('makes.index')}}" aria-expanded="false"><i class="mdi mdi-car"></i><span class="hide-menu">Car Makes</span></a></li>
+                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{ route('models.index')}}" aria-expanded="false"><i class="mdi mdi-car-connected"></i><span class="hide-menu">Car Models</span></a></li>
                     </ul>
                 </nav>
             </div>
@@ -132,29 +117,35 @@
         <div class="page-wrapper">
 
             <div class="container-fluid">
-                @yield('section')
+                @yield('content')
             </div>
  
         </div>
 
     </div>
 
-    <!-- All Jquery -->
-    <!-- ============================================================== -->
-    <script src="./assets/libs/jquery/dist/jquery.min.js"></script>
+    <script src="{{ asset('assets/libs/jquery/dist/jquery.min.js')}}"></script>
     <!-- Bootstrap tether Core JavaScript -->
-    <script src="./assets/libs/popper.js/dist/umd/popper.min.js"></script>
-    <script src="./assets/libs/bootstrap/dist/js/bootstrap.min.js"></script>
-    <script src="./assets/libs/perfect-scrollbar/dist/perfect-scrollbar.jquery.min.js"></script>
-    <script src="./assets/extra-libs/sparkline/sparkline.js"></script>
+    <script src="{{ asset('assets/libs/popper.js/dist/umd/popper.min.js')}}"></script>
+    <script src="{{ asset('assets/libs/bootstrap/dist/js/bootstrap.min.js')}}"></script>
+    <!-- apps -->
+    <script src="{{ asset('dist/js/app.min.js')}}"></script>
+    <script src="{{ asset('dist/js/app.init.js')}}"></script>
+    <script src="{{ asset('dist/js/app-style-switcher.js')}}"></script>
+    <!-- slimscrollbar scrollbar JavaScript -->
+    <script src="{{ asset('assets/libs/perfect-scrollbar/dist/perfect-scrollbar.jquery.min.js')}}"></script>
+    <script src="{{ asset('assets/extra-libs/sparkline/sparkline.js')}}"></script>
     <!--Wave Effects -->
-    <script src="./dist/js/waves.js"></script>
+    <script src="{{ asset('dist/js/waves.js')}}"></script>
     <!--Menu sidebar -->
-    <script src="./dist/js/sidebarmenu.js"></script>
+    <script src="{{ asset('dist/js/sidebarmenu.js')}}"></script>
+
     <!--Custom JavaScript -->
-    <script src="./dist/js/custom.min.js"></script>
-    <!--This page JavaScript -->
- 
+    <script src="{{ asset('/js/custom.min.js')}}"></script>
+
+        <!--Gallery JavaScript -->
+    <script src="{{ asset('/assets/libs/magnific-popup/dist/jquery.magnific-popup.min.js')}}"></script>
+    <script src="{{ asset('/assets/libs/magnific-popup/meg.init.js')}}"></script>
 
 
 </body>

@@ -58,7 +58,10 @@ class CarMakeController extends Controller
      */
     public function show($id)
     {
-        //
+        $car_make = CarMake::find($id);
+
+                
+        return view('car_make.show',compact('car_make'));
     }
 
     /**
@@ -79,9 +82,14 @@ class CarMakeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        //
+        $carmake= CarMake::findOrFail($request->car_make_id);
+
+        $carmake->make = $request->input('make');
+        $carmake->update();
+
+        return back();
     }
 
     /**
@@ -90,8 +98,10 @@ class CarMakeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request)
     {
-        //
+        $carmake = CarMake::findOrFail($request->car_make_id);
+        $carmake->delete();
+        return back();
     }
 }

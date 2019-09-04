@@ -20,8 +20,10 @@ class CarModelController extends Controller
     public function index()
     {
         $carMake = CarMake::all();
-        $carModel = CarModel::all();
-        return view('car_model.index', compact('carMake','CarModel'));
+        //$carModel = CarModel::orderBy('created_at','desc')->paginate(10);
+        $carmodel = CarModel::orderBy('created_at','desc')->paginate(10);
+       // dd($carmake->carmodels);
+        return view('car_model.index', compact('carMake','carmodel'))->with('i', (request()->input('page', 1) - 1) * 5);
     }
 
     /**
@@ -47,10 +49,10 @@ class CarModelController extends Controller
 
 
         $carModel = new CarModel();
-        $carModel->car_makes_id = $request->input('car_makes_id');
+        $carModel->car_make_id = $request->input('car_make_id');
         $carModel->model = $request->input('model');
         $carModel->number_plate = $request->input('number_plate');
-
+        $carModel->price = $request->input('price');
 
      if ($request->hasFile('photo')) {
          $file = $request->file('photo');
@@ -83,7 +85,7 @@ class CarModelController extends Controller
 
         $carModel->descriptions = $request->input('descriptions');
         $carModel->save();
-        return back()->with('carModel',$carModel);
+        return back();
     }
 
     /**
@@ -115,9 +117,31 @@ class CarModelController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        //
+        $carModel = CarModel::findOrFail($request->car_model_id);
+
+        $carModel->car_make_id = $request->input('car_make_id');
+        $carModel->model = $request->input('model');
+        $carModel->number_plate = $request->input('number_plate');
+        $carModel->price = $request->input('price');
+
+     if ($request->hasFile('photo')) {
+         $file = $request->file('photo');
+         $extension = $file->getClientOriginalExtension();
+         $filename = time().'.'.$extension;
+         $file->move('public/cover_images', $filename);
+         $carModel->photo = $filename; 
+     }else {
+         return $request;
+         $carModel->photo = '';
+     }
+     
+     
+
+        $carModel->descriptions = $request->input('descriptions');
+        $carModel->update();
+        return back();
     }
 
     /**
@@ -126,8 +150,10 @@ class CarModelController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request)
     {
-        //
+        $carmodel = CarModel::findOrFail($request->car_model_id);
+        $carmodel->delete();
+        return back();
     }
 }

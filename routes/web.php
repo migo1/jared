@@ -23,6 +23,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::resource('dashboard', 'DashboardController');
 Route::get('/users/logout','Auth\LoginController@userLogout')->name('user.logout');
 
+
 Route::prefix('admin')->group( function(){
     Route::get('/login', 'Auth\AdminLoginController@showLoginForm')->name('admin.login');
     Route::post('/login', 'Auth\AdminLoginController@login')->name('admin.login.submit');
@@ -37,8 +38,18 @@ Route::prefix('admin')->group( function(){
 });
 
 //admins
-
+Route::group(['middleware' => ['auth:admin']], function() {
+    Route::resource('roles','RoleController');
+    Route::resource('admins','UserController');
+});
 Route::resource('admin_dashboard', 'Admin\DashboardController');
 Route::resource('car_makes', 'CarMakeController');
 Route::resource('car_models', 'CarModelController');
-Route::resource('rent_details', 'RentDetailController');
+Route::resource('model', 'ModelController');
+Route::resource('rents', 'RentController');
+Route::resource('non_customers', 'NonCustomerRentController');
+Route::resource('customers', 'CustomerController');
+
+//customers
+Route::resource('makes', 'User\CarMakeController');
+Route::resource('models', 'User\CarModelController');

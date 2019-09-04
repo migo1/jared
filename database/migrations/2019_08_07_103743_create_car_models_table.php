@@ -16,7 +16,7 @@ class CreateCarModelsTable extends Migration
         Schema::create('car_models', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('car_makes_id');
-            $table->foreign('car_makes_id')->references('id')->on('car_makes')->onDelete('cascade');
+            $table->foreign('car_make_id')->references('id')->on('car_makes')->onDelete('cascade');
             $table->string('model');
             $table->string('number_plate')->unique();
             $table->string('photo')->nullable();

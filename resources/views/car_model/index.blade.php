@@ -16,36 +16,52 @@
                     <table class="table no-wrap v-middle">
                         <thead>
                             <tr class="border-0">
+                                <th class="border-0">No.</th>
                                 <th class="border-0">Car Model</th>
                                 <th class="border-0">Number Plate</th>
                                 <th class="border-0">Photo</th>
+                                <th class="border-0">Car Status</th>
                                 <th class="border-0">Action</th>
                             </tr>
                         </thead>
                         <tbody>
+                            @foreach ($carmodel as $carmodels)
+                                
                             <tr>
+                            <td>{{++$i}}</td>
                                 <td>
                                     <div class="d-flex no-block align-items-center">
-                                        <div class="mr-2"><img src="../../assets/images/users/d1.jpg" alt="user" class="rounded-circle" width="45" /></div>
+                                            @php
+                                            $pic_url =  asset('./assets/images/users/noimage.jpg');
+                                            if($carmodels->photo){
+                                                $pic_url =  "/public/cover_images/".$carmodels->photo;
+                                           }
+                      
+                                        @endphp
+                                        <div class="mr-2"><img src="{{ $pic_url }}" class="rounded-circle" width="45" /></div>
                                         <div class="">
-                                            <h5 class="mb-0 font-16 font-medium">Hanna Gover</h5><span>hgover@gmail.com</span></div>
+                                        <h5 class="mb-0 font-16 font-medium">{{ $carmodels->carmake->make }}</h5><span>{{ $carmodels->model }}</span></div>
                                     </div>
                                 </td>
-                                <td>Elite Admin</td>
+                            <td>{{ $carmodels->number_plate }}</td>
+                                <td>{{ $carmodels->price }}</td>
+                            <td>{{ $carmodels->descriptions }}</td>
+                               {{-- <td><i class="fa fa-circle text-orange" data-toggle="tooltip" data-placement="top" title="In Progress"></i></td>--}}
+
                                 <td>
-                                    <div class="popover-icon">
-                                        <a class="btn-circle btn btn-info" href="javascript:void(0)">SS</a>
-                                        <a class="btn-circle btn btn-cyan text-white popover-item" href="javascript:void(0)">DS</a>
-                                        <a class="btn-circle btn p-0 popover-item" href="javascript:void(0)"><img src="../../assets/images/users/1.jpg" class="rounded-circle" width="39" alt="" /></a>
-                                        <a class="btn-circle btn btn-outline-secondary" href="javascript:void(0)">+</a>
-                                    </div>
+                                    <button class="btn btn-dark btn-flat btn-sm">View</button>
+                                    <button class="btn btn-info btn-flat btn-sm">Edit</button>
+                                    <button class="btn btn-danger btn-flat btn-sm"
+                                    data-mycmdid = {{ $carmodels->id }} 
+                
+                                    data-toggle="modal" data-target="#delete_car"
+                                    >Delete</button>
                                 </td>
-                                <td><i class="fa fa-circle text-orange" data-toggle="tooltip" data-placement="top" title="In Progress"></i></td>
-                                <td>35</td>
-                                <td class="blue-grey-text  text-darken-4 font-medium">$96K</td>
                             </tr>
+                            @endforeach
                         </tbody>
                     </table>
+                    {{$carmodel->links()}}
                 </div>
             </div>
         </div>
@@ -63,7 +79,7 @@
                 <span aria-hidden="true">&times;</span>
               </button>
             </div>
-            <form  method="POST" action="{{ route('car_models.store')}}">
+            <form  method="POST" action="{{ route('car_models.store')}}" enctype="multipart/form-data">
             <div class="modal-body">
               @csrf
               @include('car_model.create')
@@ -76,4 +92,45 @@
           </div>
         </div>
       </div>
+
+       <!-- Modal delete-->
+ <div class="modal fade" id="delete_car" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title text-center" id="exampleModalLabel">Delete Confirmation</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <form class="form-horizontal" method="POST" action="{{ route('model.destroy','test')}}">
+          {{method_field('delete')}}
+          @csrf
+        <div class="modal-body mt-0 mb-0">
+          <p class="text-center">
+            Are you sure you want to delete this car model?
+          </p>
+          <input type="hidden" name="car_model_id" id="car_model_id" value="">
+        
+        </div>
+       
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary btn-sm btn-flat" data-dismiss="modal">No, Cancel</button>
+          <button type="submit" class="btn btn-danger btn-sm btn-flat">Yes, Delete</button>
+        </div>
+      </form>
+      </div>
+    </div>
+  </div>
+
+      <script>
+        $('#delete_car').on('show.bs.modal', function (event) {
+        var button = $(event.relatedTarget) 
+        var car_model_id = button.data('mycmdid')
+      
+        var modal = $(this)
+      
+        modal.find('.modal-body #car_model_id').val(car_model_id)
+      })
+        </script>
 @endsection

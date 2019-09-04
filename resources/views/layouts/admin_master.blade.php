@@ -16,8 +16,15 @@
     <!-- Custom CSS -->
     <link href="{{ asset('assets/libs/chartist/dist/chartist.min.css')}}" rel="stylesheet">
     <link href="{{ asset('assets/extra-libs/c3/c3.min.css')}}" rel="stylesheet">
+
+    <!-- Gallery CSS -->
+    <link href="{{ asset('assets/libs/magnific-popup/dist/magnific-popup.css')}}" rel="stylesheet">
     <!-- Custom CSS -->
     <link href="{{ asset('dist/css/style.min.css')}}" rel="stylesheet">
+
+
+    <script src="{{ asset('assets/libs/jquery/dist/jquery.min.js')}}"></script>
+
 
 </head>
 
@@ -90,7 +97,14 @@
                                     </div>
                                 </div>
                                
-                                <a class="dropdown-item" href="javascript:void(0)"><i class="fa fa-power-off mr-1 ml-1"></i> Logout</a>
+                                <a class="dropdown-item" 
+                                href="{{ route('logout') }}"
+                                       onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();"><i class="fa fa-power-off mr-1 ml-1">
+                                    </i> Logout</a>
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                            @csrf
+                                        </form>
                             </div>
                         </li>
         
@@ -123,13 +137,13 @@
                     <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{ route('admin_dashboard.index')}}" aria-expanded="false"><i class="mdi mdi-view-dashboard"></i><span class="hide-menu">Dashboard</span></a></li>
                     <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{ route('car_makes.index')}}" aria-expanded="false"><i class="mdi mdi-car"></i><span class="hide-menu">Car Makes</span></a></li>
                     <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{ route('car_models.index')}}" aria-expanded="false"><i class="mdi mdi-car-connected"></i><span class="hide-menu">Car Models</span></a></li>
+                    <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{ route('customers.index')}}" aria-expanded="false"><i class="mdi mdi-account-multiple"></i><span class="hide-menu">Customers</span></a></li>
 
 
-                        <li class="sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-face"></i><span class="hide-menu">User Management </span></a>
+                        <li class="sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-face"></i><span class="hide-menu">Admin Management </span></a>
                             <ul aria-expanded="false" class="collapse  first-level">
-                                <li class="sidebar-item"><a href="index.html" class="sidebar-link"><i class="mdi mdi-adjust"></i><span class="hide-menu"> Staffs </span></a></li>
-                                <li class="sidebar-item"><a href="index2.html" class="sidebar-link"><i class="mdi mdi-adjust"></i><span class="hide-menu"> Roles </span></a></li>
-
+                                <li class="sidebar-item"><a href="{{ route('admins.index') }}" class="sidebar-link"><i class="mdi mdi-account-multiple"></i><span class="hide-menu"> Administrators </span></a></li>
+                                <li class="sidebar-item"><a href="{{ route('roles.index') }}" class="sidebar-link"><i class="mdi mdi-account-settings-variant"></i><span class="hide-menu"> Roles </span></a></li>
                             </ul>
                         </li>
                        
@@ -155,7 +169,6 @@
 
     <div class="chat-windows"></div>
 
-    <script src="{{ asset('assets/libs/jquery/dist/jquery.min.js')}}"></script>
     <!-- Bootstrap tether Core JavaScript -->
     <script src="{{ asset('assets/libs/popper.js/dist/umd/popper.min.js')}}"></script>
     <script src="{{ asset('assets/libs/bootstrap/dist/js/bootstrap.min.js')}}"></script>
@@ -173,6 +186,10 @@
 
     <!--Custom JavaScript -->
     <script src="{{ asset('/js/custom.min.js')}}"></script>
+
+        <!--Gallery JavaScript -->
+    <script src="{{ asset('/assets/libs/magnific-popup/dist/jquery.magnific-popup.min.js')}}"></script>
+    <script src="{{ asset('/assets/libs/magnific-popup/meg.init.js')}}"></script>
 </body>
 
 </html>
