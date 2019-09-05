@@ -19,7 +19,13 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/verifyOTP', 'verifyOTPController@showVerifyForm');
+
+Route::post('/verifyOTP', 'verifyOTPController@verify');
+
+Route::group(['middleware' => 'TwoFA'], function () {
+    Route::get('/home', 'HomeController@index')->name('home');
+});
 Route::resource('dashboard', 'DashboardController');
 Route::get('/users/logout','Auth\LoginController@userLogout')->name('user.logout');
 

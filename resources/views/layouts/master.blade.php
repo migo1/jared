@@ -105,10 +105,13 @@
         
                                         </div>
                                     </div>    
-                        </li>               
+                        </li>
+                        @if (auth()->user()->isVerified == 1)
                         <li class="sidebar-item"><a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{ route('dashboard.index')}}" aria-expanded="false"><i class="mdi mdi-view-dashboard"></i><span class="hide-menu">Dashboard</span></a></li>
                         <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{ route('makes.index')}}" aria-expanded="false"><i class="mdi mdi-car"></i><span class="hide-menu">Car Makes</span></a></li>
-                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{ route('models.index')}}" aria-expanded="false"><i class="mdi mdi-car-connected"></i><span class="hide-menu">Car Models</span></a></li>
+                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{ route('models.index')}}" aria-expanded="false"><i class="mdi mdi-car-connected"></i><span class="hide-menu">Car Models</span></a></li>  
+                        @endif               
+                       
                     </ul>
                 </nav>
             </div>
