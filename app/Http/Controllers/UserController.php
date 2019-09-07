@@ -49,7 +49,7 @@ class UserController extends Controller
     {
         $this->validate($request, [
             'name' => 'required',
-            'email' => 'required|email|unique:users,email',
+            'email' => 'required|email|unique:admins,email',
             'password' => 'required|same:confirm-password',
             'roles' => 'required'
         ]);
@@ -64,7 +64,7 @@ class UserController extends Controller
 
 
         return redirect()->route('admins.index')
-                        ->with('success','User created successfully');
+                        ->with('success','Admin created successfully');
     }
 
 
@@ -109,7 +109,7 @@ class UserController extends Controller
     {
         $this->validate($request, [
             'name' => 'required',
-            'email' => 'required|email|unique:users,email,'.$id,
+            'email' => 'required|email|unique:admins,email,'.$id,
             'password' => 'same:confirm-password',
             'roles' => 'required'
         ]);
@@ -132,7 +132,7 @@ class UserController extends Controller
 
 
         return redirect()->route('admins.index')
-                        ->with('success','User updated successfully');
+                        ->with('success','Admin updated successfully');
     }
 
 
@@ -144,8 +144,8 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        User::find($id)->delete();
-        return redirect()->route('users.index')
+        Admin::find($id)->delete();
+        return redirect()->route('admins.index')
                         ->with('success','User deleted successfully');
     }
 }

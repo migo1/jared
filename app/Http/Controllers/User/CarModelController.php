@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\CarModel;
 use App\CarMake;
+use App\Rent;
 
 class CarModelController extends Controller
 {
@@ -60,8 +61,13 @@ class CarModelController extends Controller
      */
     public function show($id)
     {
+     //   $rents = Rent::find($id);
+
+       
+
         $model = CarModel::find($id);
 
+       
         return view('user_models.show',compact('model'));
     }
 

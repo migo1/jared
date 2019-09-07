@@ -1,22 +1,12 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 use App\Rent;
-use App\CarMake;
-use App\CarModel;
-use App\User;
-use DB;
 
-class DashboardController extends Controller
+class RentalController extends Controller
 {
-
-    public function __construct()
-    {
-        $this->middleware('auth:admin');
-    }
     /**
      * Display a listing of the resource.
      *
@@ -24,19 +14,7 @@ class DashboardController extends Controller
      */
     public function index()
     {
-
-        $rents = Rent::orderBy('created_at','desc')->paginate(5);
-
-        $revenue = DB::table('rents')->where('payment_status','paid')->sum('amount');
-
-        $customers = User::select('email')->count();
-
-        $makes = CarMake::select('make')->count();
-
-        $models = CarModel::select('model')->count();
-       // dd($customers);
-
-        return view('admins.dashboard.index',compact('rents','revenue','customers','makes','models'))->with('i', (request()->input('page', 1) - 1) * 5);
+        //
     }
 
     /**
@@ -89,9 +67,33 @@ class DashboardController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        //
+        $rent = Rent::findOrFail($request->rent_id);
+        $rent->user_id = $request->input('user_id');
+        $rent->car_model_id = $request->input('car_model_id');
+        $rent->rent_date = $request->input('rent_date');
+        $rent->return_date = $request->input('return_date');
+        $borrow = strtotime($rent->rent_date);
+        $return = strtotime($rent->return_date);
+        $diff = $return - $borrow;
+        if ($diff > 0) {
+            $rent->total_days = floor($diff / (60*60*24));
+        } else {
+            $rent->total_days = 0;
+        }
+
+       $days =  $rent->total_days;
+
+        $price =  $rent->carmodels->price;
+
+        $rent->amount = $price*$days;
+        $rent->payment_status = $request->input('payment_status');
+        $rent->returned_day = $request->input('returned_day');
+        $rent->return_status = $request->input('return_status');
+
+        $rent->update();
+        return back();
     }
 
     /**

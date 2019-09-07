@@ -21,7 +21,6 @@ class CreateRentsTable extends Migration
             $table->foreign('car_model_id')->references('id')->on('car_models')->onDelete('cascade');
             $table->date('rent_date');
             $table->date('return_date');
-            $table->double('amount')->nullable();
             $table->float('amount_payed')->nullable();
             $table->text('payment_status')->nullable();
             $table->date('returned_day')->nullable();

@@ -59,4 +59,9 @@ class User extends Authenticatable
             Mail::to(auth()->user()->email)->send(new OTPMail($this->cacheTheOTP()));
         }
     }
+
+    public function rents()
+    {
+        return $this->hasMany('App\Rent');
+    }
 }

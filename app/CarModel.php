@@ -20,6 +20,6 @@ class CarModel extends Model
 
     public function rents()
     {
-        return $this->hasMany('App\Rent');
+        return $this->hasMany('App\Rent', 'car_model_id');
     }
 }

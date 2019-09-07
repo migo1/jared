@@ -47,13 +47,13 @@ Route::prefix('admin')->group( function(){
 Route::group(['middleware' => ['auth:admin']], function() {
     Route::resource('roles','RoleController');
     Route::resource('admins','UserController');
+    Route::resource('rentals', 'RentalController');
 });
 Route::resource('admin_dashboard', 'Admin\DashboardController');
 Route::resource('car_makes', 'CarMakeController');
 Route::resource('car_models', 'CarModelController');
 Route::resource('model', 'ModelController');
 Route::resource('rents', 'RentController');
-Route::resource('non_customers', 'NonCustomerRentController');
 Route::resource('customers', 'CustomerController');
 
 //customers

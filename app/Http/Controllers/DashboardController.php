@@ -18,7 +18,10 @@ class DashboardController extends Controller
      */
     public function index()
     {
-        return view('dashboard.index');
+        $rents = auth()->user()->rents()->paginate(5);
+
+ 
+        return view('dashboard.index',compact('rents'))->with('i', (request()->input('page', 1) - 1) * 5);
     }
 
     /**
