@@ -27,7 +27,7 @@ class DashboardController extends Controller
 
         $rents = Rent::orderBy('created_at','desc')->paginate(5);
 
-        $revenue = DB::table('rents')->where('payment_status','paid')->sum('amount');
+        $revenue = DB::table('rents')->where('payment_status','paid')->orWhere('return_status','returned')->orWhere('return_status','picked')->sum('amount');
 
         $customers = User::select('email')->count();
 

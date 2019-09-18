@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\CarModel;
 use App\CarMake;
 use App\Rent;
+use DB;
 
 class CarModelController extends Controller
 {
@@ -67,8 +68,10 @@ class CarModelController extends Controller
 
         $model = CarModel::find($id);
 
+        $rent = DB::table('rents')->select('return_status');
+
        
-        return view('user_models.show',compact('model'));
+        return view('user_models.show',compact('model', 'rent'));
     }
 
     /**

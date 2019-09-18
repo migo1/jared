@@ -42,11 +42,16 @@ class CarMakeController extends Controller
      */
     public function store(Request $request)
     {
+
+        $this->validate($request, [
+            'make' => 'required',
+        ]);
+
         $carMake = new CarMake;
 
         $carMake->make = $request->input('make');
         $carMake->save();
-        return back();
+        return back()->with('success','car make added successfully');
 
     }
 

@@ -88,10 +88,18 @@
                                             </div>
                                             
                                             <div class="form-group">
+
+
+                                              @foreach ($model->rents as $car)
+                                              @if ( $car->return_status == 'returned')
                                                
-                                                        <div class="col-sm-12">
-                                                                <button type="submit" class="btn btn-success" >Rent Car</button>
-                                                        </div>
+                                              <div class="col-sm-12">
+                                                      <button type="submit" class="btn btn-success" >Rent Car</button>
+                                              </div>
+
+                                              @endif
+                                              @endforeach
+                                            
     
                                             </div>
                                         </form>
@@ -139,7 +147,14 @@
                                             <td>{{ $car->amount }}</td>
                                             <td>{{ $car->return_status }}</td>
                                             <td>
+                                              @if ( $car->return_status != 'picked')
+                                              @if ($car->return_status != 'returned')
+
                                               @if ( $car->return_status != 'reserved')
+
+                                              
+                                                  
+                                             
                                               <button type="button" class="btn btn-info btn-sm"
                                                 
                                               data-myrid = "{{ $car->id }}" data-myuid = "{{ $car->user_id }}" data-mycid = "{{ $car->car_model_id }}" 
@@ -156,6 +171,8 @@
                                                 data-myrid = "{{ $car->id }}"
                                                 data-toggle="modal" data-target="#delete"
                                                 >Cancel Resevation</button>
+                                                @endif
+                                                @endif
                                             </td>
                                             </tr>
                                       @endforeach

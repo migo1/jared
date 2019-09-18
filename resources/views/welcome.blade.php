@@ -22,14 +22,18 @@
         </div>--}}
 
         <!doctype html>
-        <html>
-        <head>
+        <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+                <head>
             <meta charset="UTF-8">
             <title>Jays trucks</title>
             <meta name="description" content="Scarica gratis il nostro Template HTML/CSS GARAGE. Se avete bisogno di un design per il vostro sito web GARAGE può fare per voi. Web Domus Italia">
             <meta name="author" content="Web Domus Italia">
             <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
             <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+             <!-- CSRF Token -->
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+
             <link rel="stylesheet" type="text/css" href="source/bootstrap-3.3.6-dist/css/bootstrap.css">
             <link rel="stylesheet" type="text/css" href="source/font-awesome-4.5.0/css/font-awesome.css">
             <link rel="stylesheet" type="text/css" href="style/slider.css">
@@ -43,10 +47,22 @@
                         <li>Give us a call : +25470000000 </li>
                     </ul>
                     <ul class="logreg">
+                            @if (Route::has('login'))
+                            @auth
+                            <li><a href="{{ url('admin/login') }}">Admin Login </a> </li>
+                            @else
                         <li><a href="{{ url('admin/login') }}">Admin Login </a> </li>
                         <li><a href="{{ route('login') }}">Login </a> </li>
+
+                        @if (Route::has('register'))
                         <li><a href="{{ route('register') }}"><span class="register">Register</span></a></li>
+                        @endif
+                        @endauth
+                        @endif
                     </ul>
+            </div>
+            <div class="feturedsection">
+                <h1 class="text-center"><span class="bdots">&bullet;</span>JAYS TRUCKS RENTALS&bullet;</h1>
             </div>
             <!-- Navbar Up -->
             <nav class="topnavbar navbar-default topnav">
@@ -67,6 +83,7 @@
                 </div>
             </nav>
         </div>
+       
         <!--_______________________________________ Carousel__________________________________ -->
         <div class="allcontain">
             <div id="carousel-up" class="carousel slide" data-ride="carousel">

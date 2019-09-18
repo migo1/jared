@@ -22,7 +22,7 @@
         </div> 
         <div class="form-check" >
                 <label class="form-check-label">
-                  <input type="checkbox" value="reserved" class="form-check-input" name="return_status">Picked up
+                  <input type="checkbox" value="picked" class="form-check-input" name="return_status">Picked up
                 </label>
               </div>
     </div>

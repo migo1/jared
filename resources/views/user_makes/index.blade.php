@@ -6,9 +6,7 @@
     <div class="col-lg-12">
         <div class="card">
             <div class="card-body">
-                    <div>
-                            <h4 class="card-title">Car Makes Table<button type="button" class="btn btn-flat btn-sm btn-success float-right"  data-toggle="modal" data-target="#add_car_make">Create New</button></h4>
-                        </div>
+                
                 <div class="d-md-flex align-items-center">
                   
                 </div>
