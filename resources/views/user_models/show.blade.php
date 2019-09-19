@@ -44,6 +44,11 @@
                     <!-- Column -->
                     <div class="col-lg-8 col-xlg-9 col-md-7">
                         <div class="card">
+                            @if ($message = Session::get('success'))
+                            <div class="alert alert-success">
+                              <p>{{ $message }}</p>
+                            </div>
+                            @endif
                             <!-- Tabs -->
                             <ul class="nav nav-pills custom-pills" id="pills-tab" role="tablist">
                                 <li class="nav-item">
@@ -90,15 +95,12 @@
                                             <div class="form-group">
 
 
-                                              @foreach ($model->rents as $car)
-                                              @if ( $car->return_status == 'returned')
                                                
                                               <div class="col-sm-12">
                                                       <button type="submit" class="btn btn-success" >Rent Car</button>
                                               </div>
 
-                                              @endif
-                                              @endforeach
+                                           
                                             
     
                                             </div>
@@ -117,6 +119,14 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="card">
+
+
+                            @if ($message = Session::get('primary'))
+                            <div class="alert alert-success">
+                              <p>{{ $message }}</p>
+                            </div>
+                            @endif
+
                             <div class="card-body">
                                     <div>
                                             <h4 class="card-title">Rented car </h4>
@@ -238,7 +248,7 @@
             </div>
            
             <div class="modal-footer">
-              <button type="button" class="btn btn-primary btn-sm btn-flat" data-dismiss="modal">No, Cancel</button>
+              <button type="button" class="btn btn-primary btn-sm btn-flat" data-dismiss="modal">No</button>
               <button type="submit" class="btn btn-danger btn-sm btn-flat">Yes, Cancel</button>
             </div>
           </form>

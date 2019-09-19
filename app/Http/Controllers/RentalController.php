@@ -93,7 +93,7 @@ class RentalController extends Controller
         $rent->return_status = $request->input('return_status');
 
         $rent->update();
-        return back();
+        return back()->with('success','car is payment is settled');
     }
 
     /**

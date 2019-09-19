@@ -54,7 +54,11 @@
         </div>
     </div>
 </div>
-
+@if ($message = Session::get('success'))
+<div class="alert alert-success">
+  <p>{{ $message }}</p>
+</div>
+@endif
 
 <div class="row">
         <div class="col-lg-12">
@@ -139,7 +143,7 @@
                 <div class="modal-dialog" role="document">
                   <div class="modal-content">
                     <div class="modal-header">
-                      <h5 class="modal-title" id="exampleModalLabel">Confirm reservation</h5>
+                      <h5 class="modal-title" id="exampleModalLabel">car status</h5>
                       <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                       </button>

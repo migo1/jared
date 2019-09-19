@@ -5,7 +5,7 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">Enter OTP</div>
+                <div class="card-header">If you've just registered please login agian and check email for your OTP </div>
 
                 @if($errors->count() > 0)
 

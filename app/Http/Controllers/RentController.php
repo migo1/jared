@@ -62,7 +62,7 @@ class RentController extends Controller
         $rent->return_status = $request->input('return_status');
 
                 $rent->save();
-                return back();
+                return back()->with('success','car is reserved successfully');
   
     }
 
@@ -121,7 +121,7 @@ class RentController extends Controller
         $rent->return_status = $request->input('return_status');
 
         $rent->update();
-        return back();
+        return back()->with('primary','car is booked successfully');
    
 
 
